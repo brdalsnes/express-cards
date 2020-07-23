@@ -3,6 +3,7 @@ import 'reflect-metadata';
 import bodyParser from 'body-parser';
 import { createConnection } from 'typeorm';
 import createError from 'http-errors';
+import morgan from 'morgan';
 require('dotenv').config();
 
 import routes from './api/routes';
@@ -11,7 +12,8 @@ const port = process.env.PORT || '8000';
 
 createConnection().then(() => {
     const app = express();
-    app.use(bodyParser.json())
+    app.use(bodyParser.json());
+    app.use(morgan('dev'));
 
     app.use('/api', routes);
 
