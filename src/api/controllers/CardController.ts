@@ -16,6 +16,14 @@ class CardController {
         if (!card) throw createError(400, 'Card not found');
         res.send(card);
     })
+
+    static post = asyncHandler(async (req: Request, res: Response) => {
+        const cardService = new CardService();
+        const { title } = req.body;
+        if (!title) throw createError(400, 'Missing fields');
+        const card = await cardService.create(req.body);
+        res.send(card);
+    })
 }
 
 export default CardController;
