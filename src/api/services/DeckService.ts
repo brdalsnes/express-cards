@@ -12,6 +12,8 @@ class DeckService {
     get = (id: string) => this.deckRepository.findOne(id);
 
     create = (deck: Deck) => this.deckRepository.save(deck);
+
+    delete = (id: string) => this.deckRepository.delete(id);
 }
 
 export default DeckService;
