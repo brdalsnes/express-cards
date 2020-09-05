@@ -12,6 +12,8 @@ class CardService {
     get = (id: string) => this.cardRepository.findOne(id);
 
     save = (card: Card) => this.cardRepository.save(card);
+
+    delete = (id: string) => this.cardRepository.delete(id);
 }
 
 export default CardService;

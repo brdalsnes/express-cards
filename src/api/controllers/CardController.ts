@@ -32,6 +32,30 @@ class CardController {
         deckService.save(deck);
         res.send(savedCard);
     })
+
+    static put = asyncHandler(async (req: Request, res: Response) => {
+        const cardService = new CardService();
+        const deckService = new DeckService();
+        const { title, deckId } = req.body;
+        if (!title && !deckId) throw createError(400, 'Missing fields');
+        const card = await cardService.get(req.params.id);
+        if (title) card.title = title;
+        if (deckId) {
+            const deck = await deckService.get(deckId);
+            deck.cards.push(card);
+            deckService.save(deck);
+        }
+        const savedCard = await cardService.save(card);
+        res.send(savedCard);
+    })
+
+    static delete = asyncHandler(async (req: Request, res: Response) => {
+        const cardService = new CardService();
+        const result = await cardService.delete(req.params.id);
+        if (!result.affected) throw createError(404, 'Deck not found');
+        res.status(204);
+        res.send();
+    })
 }
 
 export default CardController;

@@ -14,5 +14,7 @@ router.delete('/deck/:id', DeckController.delete);
 router.get('/card', CardController.getAll);
 router.get('/card/:id', CardController.get);
 router.post('/card', CardController.post);
+router.put('/card/:id', CardController.put);
+router.delete('/card/:id', CardController.delete);
 
 export default router;
