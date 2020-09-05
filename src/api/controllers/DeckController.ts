@@ -25,7 +25,7 @@ class DeckController {
         const deck = new Deck();
         deck.title = title;
         deck.cards = cards || [];
-        const savedDeck = await deckService.create(deck);
+        const savedDeck = await deckService.save(deck);
         res.send(savedDeck);
     })
 
@@ -36,7 +36,7 @@ class DeckController {
         const { title } = req.body;
         if (!title) throw createError(400, 'Missing fields');
         deck.title = title;
-        const savedDeck = await deckService.create(deck);
+        const savedDeck = await deckService.save(deck);
         res.send(savedDeck);
     })
 

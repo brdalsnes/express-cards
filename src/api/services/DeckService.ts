@@ -9,9 +9,9 @@ class DeckService {
 
     getAll = () => this.deckRepository.find();
 
-    get = (id: string) => this.deckRepository.findOne(id);
+    get = (id: string) => this.deckRepository.findOne(id, { relations: ['cards'] });
 
-    create = (deck: Deck) => this.deckRepository.save(deck);
+    save = (deck: Deck) => this.deckRepository.save(deck);
 
     delete = (id: string) => this.deckRepository.delete(id);
 }

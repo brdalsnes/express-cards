@@ -27,10 +27,9 @@ class CardController {
         const card = new Card();
         const deck = await deckService.get(deckId);
         card.title = title;
-        card.deck = deck;
-        const savedCard = await cardService.create(card);
-        deck.cards.push(card);
-        deckService.create(deck);
+        const savedCard = await cardService.save(card);
+        deck.cards.push(savedCard);
+        deckService.save(deck);
         res.send(savedCard);
     })
 }
