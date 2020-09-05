@@ -1,4 +1,5 @@
-import {Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import Card from '../entity/Card';
 
 @Entity()
 export class Deck {
@@ -9,8 +10,9 @@ export class Deck {
     @Column("varchar")
     title: string;
 
-    @Column("int")
-    size: number;
+    @OneToMany(type => Card, card => card.deck)
+    cards: Card[];
+
 }
 
 export default Deck;

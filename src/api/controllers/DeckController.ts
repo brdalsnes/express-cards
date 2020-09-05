@@ -20,11 +20,11 @@ class DeckController {
 
     static post = asyncHandler(async (req: Request, res: Response) => {
         const deckService = new DeckService();
-        const { title, size } = req.body;
-        if (!title || !size ) throw createError(400, 'Missing fields');
+        const { title, cards } = req.body;
+        if (!title) throw createError(400, 'Missing fields');
         const deck = new Deck();
         deck.title = title;
-        deck.size = size;
+        deck.cards = cards || [];
         const savedDeck = await deckService.create(deck);
         res.send(savedDeck);
     })
@@ -33,10 +33,9 @@ class DeckController {
         const deckService = new DeckService();
         const deck = await deckService.get(req.params.id);
         if (!deck) throw createError(400, 'Deck not found');
-        const { title, size } = req.body;
-        if (!title || !size ) throw createError(400, 'Missing fields');
+        const { title } = req.body;
+        if (!title) throw createError(400, 'Missing fields');
         deck.title = title;
-        deck.size = size;
         const savedDeck = await deckService.create(deck);
         res.send(savedDeck);
     })
